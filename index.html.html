@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superação – Movimento Regnum Christi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark-brown: #3b1f0e;
+    --medium-brown: #6b3a1f;
+    --gold: #c9922a;
+    --gold-light: #e8b84b;
+    --cream: #f5efe6;
+    --cream-dark: #ede3d5;
+    --white: #fff;
+    --text-dark: #2a1505;
+    --text-mid: #5a3a1a;
+    --border: #d4bfa0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  @keyframes pulse-cross {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.12); opacity: .85; }
+  }
+  @keyframes lineGrow {
+    from { width: 0; }
+    to   { width: 60px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(170deg, var(--dark-brown) 0%, #5a2e0e 60%, #3b1f0e 100%);
+    text-align: center;
+    padding: 36px 20px 48px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeDown .9s ease both;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .shield-icon {
+    width: 38px; height: 38px;
+    fill: var(--gold);
+    filter: drop-shadow(0 2px 6px rgba(201,146,42,.4));
+  }
+  .logo-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .cross-icon {
+    font-size: 28px;
+    color: var(--gold);
+    display: block;
+    margin: 8px auto;
+    animation: pulse-cross 3s ease-in-out infinite;
+  }
+  .badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    margin-bottom: 22px;
+  }
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 88px);
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1;
+    background: linear-gradient(90deg, #c9922a, #f0d080, #c9922a, #e8b84b);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+  .subtitle {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,.6);
+    margin-top: 10px;
+    font-weight: 300;
+  }
+  .header-line {
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    margin: 18px auto 0;
+    animation: lineGrow 1.2s .6s ease forwards;
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── ABOUT SECTION ── */
+  .about-box {
+    background: var(--white);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin: 50px auto;
+    max-width: 780px;
+    box-shadow: 0 4px 24px rgba(59,31,14,.08);
+  }
+  .about-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .about-box p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 12px;
+  }
+  .about-box p:last-child { margin-bottom: 0; }
+  .about-box strong { color: var(--dark-brown); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--dark-brown);
+    margin: 50px 0 20px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-title .icon { font-size: 20px; }
+
+  /* ── MATERIAL TABLE ── */
+  .material-group {
+    margin-bottom: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(59,31,14,.08);
+  }
+  .group-header {
+    background: var(--dark-brown);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: .5px;
+    font-size: 15px;
+  }
+  .group-header .icon { font-size: 18px; }
+  .group-header .tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--dark-brown);
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+  }
+  thead tr {
+    background: #f0e8dc;
+  }
+  thead th {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    padding: 10px 20px;
+    text-align: left;
+    font-weight: 700;
+  }
+  thead th:nth-child(3),
+  thead th:nth-child(4) { text-align: center; }
+  thead th:nth-child(5) { text-align: right; }
+  tbody tr {
+    border-bottom: 1px solid #f0e8dc;
+    transition: background .2s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #fdf7f0; }
+  td {
+    padding: 11px 20px;
+    font-size: 14px;
+    color: var(--text-dark);
+    vertical-align: middle;
+  }
+  td:first-child { font-weight: 700; }
+  td:nth-child(3),
+  td:nth-child(4) { text-align: center; }
+  td:nth-child(5) { text-align: right; }
+  .val {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--medium-brown);
+    white-space: nowrap;
+  }
+  .val.confirm {
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: .5px;
+    color: var(--text-mid);
+  }
+  .qty {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark-brown);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    min-width: 42px;
+    text-align: center;
+  }
+  .qty.confirm {
+    background: #ede3d5;
+    color: var(--text-mid);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: .5px;
+  }
+
+  /* ── QUOTE BOX ── */
+  .quote-box {
+    background: linear-gradient(135deg, var(--dark-brown) 0%, #5a2e0e 100%);
+    border-radius: 6px;
+    padding: 44px 40px;
+    text-align: center;
+    margin: 50px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-box::before {
+    content: '\201C';
+    position: absolute;
+    top: -20px; left: 20px;
+    font-size: 180px;
+    font-family: 'Playfair Display', serif;
+    color: rgba(201,146,42,.15);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 28px);
+    color: var(--gold-light);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .quote-box p {
+    color: rgba(255,255,255,.75);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .quote-divider {
+    width: 40px; height: 2px;
+    background: var(--gold);
+    margin: 18px auto;
+  }
+
+  /* ── HOW TO HELP ── */
+  .help-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--dark-brown);
+    margin-bottom: 24px;
+  }
+  .help-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 50px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 28px 22px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(59,31,14,.07);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(59,31,14,.14);
+  }
+  .card-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--dark-brown);
+    margin-bottom: 10px;
+  }
+  .card p {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ── CTA BOX ── */
+  .cta-box {
+    background: linear-gradient(135deg, var(--dark-brown) 0%, #5a2e0e 100%);
+    border-radius: 6px;
+    padding: 50px 40px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .cta-cross { font-size: 28px; color: var(--gold); display: block; margin-bottom: 16px; }
+  .cta-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 26px);
+    color: var(--gold-light);
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+  .cta-box p {
+    color: rgba(255,255,255,.8);
+    font-size: 14px;
+    line-height: 1.85;
+    max-width: 560px;
+    margin: 0 auto 28px;
+  }
+  .cta-box p strong { color: var(--gold-light); }
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark-brown);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background .25s, transform .25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn:hover {
+    background: var(--gold-light);
+    transform: scale(1.04);
+  }
+  .contacts {
+    margin-top: 22px;
+    color: rgba(255,255,255,.6);
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  .contacts strong { color: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark-brown);
+    text-align: center;
+    padding: 18px 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,.4);
+    letter-spacing: 1px;
+  }
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <svg class="shield-icon" viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 2 L62 14 L62 40 C62 60 32 78 32 78 C32 78 2 60 2 40 L2 14 Z"/>
+    </svg>
+    <span class="logo-text">Regnum Christi</span>
+  </div>
+  <span class="cross-icon">✝</span>
+  <div class="badge">Movimento Regnum Christi</div>
+  <h1 class="main-title">Superação</h1>
+  <p class="subtitle">Construindo um espaço sagrado para uma comunidade que merece</p>
+  <div class="header-line"></div>
+</header>
+
+<!-- ABOUT -->
+<div class="container">
+  <div class="about-box reveal">
+    <p class="about-label">Sobre o Projeto</p>
+    <p>Há uma comunidade que celebra sua fé com alegria e devoção, mesmo sem um espaço digno para isso. Por muito tempo, encontros, missas e momentos de oração aconteceram em um local improvisado, sem as condições mínimas de conforto e segurança.</p>
+    <p>O apostolado <strong>Superação</strong> do movimento <strong>Regnum Christi</strong> está construindo uma <strong>capela</strong> para essa comunidade: um lugar de acolhida, paz e encontro com Deus. Com fé e generosidade, essa obra pode se tornar realidade.</p>
+    <p>Para isso, precisamos de materiais de construção. Cada item doado é um tijolo a mais nessa história de superação.</p>
+  </div>
+
+  <!-- MATERIALS LIST -->
+  <h2 class="section-title reveal"><span class="icon">🔨</span> Lista de Materiais Necessários</h2>
+
+  <!-- MADEIRA -->
+  <div class="material-group reveal">
+    <div class="group-header">
+      <span><span class="icon">🪵</span> Madeira</span>
+      <span class="tag">Estrutura</span>
+    </div>
+    <table>
+      <thead><tr><th>Item</th><th>Descrição</th><th>Un.</th><th>Qtd.</th><th>Valor Unit. (R$)</th></tr></thead>
+      <tbody>
+        <tr><td>Viga</td><td>5×10×3000 mm – estrutura principal do telhado</td><td>UN</td><td><span class="qty">270</span></td><td><span class="val">R$ 45,04</span></td></tr>
+        <tr><td>Tábua de Pinus</td><td>2×20×3000 mm – acabamento e vedação</td><td>UN</td><td><span class="qty">370</span></td><td><span class="val">R$ 49,57</span></td></tr>
+        <tr><td>Forro de Pinus</td><td>Ou equivalente – revestimento interno do teto</td><td>m²</td><td><span class="qty">240</span></td><td><span class="val">R$ 90,61</span></td></tr>
+        <tr><td>Maderite Plastificado</td><td>17 mm – 2,20×1,10 m – forma para concreto</td><td>UN</td><td><span class="qty">12</span></td><td><span class="val">R$ 164,20</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TELHAS -->
+  <div class="material-group reveal">
+    <div class="group-header">
+      <span><span class="icon">🏠</span> Telhas</span>
+      <span class="tag">Cobertura</span>
+    </div>
+    <table>
+      <thead><tr><th>Item</th><th>Descrição</th><th>Un.</th><th>Qtd.</th><th>Valor Unit. (R$)</th></tr></thead>
+      <tbody>
+        <tr><td>Telhas</td><td>183×100 cm – cobertura principal</td><td>UN</td><td><span class="qty">72</span></td><td><span class="val">R$ 46,10</span></td></tr>
+        <tr><td>Cumeeira 37°</td><td>Peça de arremate no topo do telhado</td><td>UN</td><td><span class="qty">18</span></td><td><span class="val">R$ 42,00</span></td></tr>
+        <tr><td>Cumeeira 40°</td><td>Peça de arremate – ângulo especial</td><td>UN</td><td><span class="qty">2</span></td><td><span class="val">R$ 55,00</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PARAFUSOS -->
+  <div class="material-group reveal">
+    <div class="group-header">
+      <span><span class="icon">🔩</span> Parafusos e Fixadores</span>
+      <span class="tag">Fixação</span>
+    </div>
+    <table>
+      <thead><tr><th>Item</th><th>Descrição</th><th>Un.</th><th>Qtd.</th><th>Valor Unit. (R$)</th></tr></thead>
+      <tbody>
+        <tr><td>Dobradiças</td><td>3 polegadas – para portas e aberturas</td><td>UN</td><td><span class="qty">48</span></td><td><span class="val">R$ 5,99</span></td></tr>
+        <tr><td>Parafusos para Telhas</td><td>Fixação das telhas na estrutura</td><td>UN</td><td><span class="qty">100</span></td><td><span class="val">R$ 0,50</span></td></tr>
+        <tr><td>Parafusos Franceses</td><td>7 polegadas – fixação pesada de madeira</td><td>UN</td><td><span class="qty">60</span></td><td><span class="val">R$ 2,00</span></td></tr>
+        <tr><td>Porcas e Arruelas</td><td>Complemento para parafusos franceses</td><td>CJ</td><td><span class="qty">60</span></td><td><span class="val">R$ 1,50</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PREGOS -->
+  <div class="material-group reveal">
+    <div class="group-header">
+      <span><span class="icon">🔨</span> Pregos</span>
+      <span class="tag">Fixação</span>
+    </div>
+    <table>
+      <thead><tr><th>Item</th><th>Descrição</th><th>Un.</th><th>Qtd.</th><th>Valor Unit. (R$)</th></tr></thead>
+      <tbody>
+        <tr><td>Pregos 19×36</td><td>Uso geral em estrutura de madeira</td><td>KG</td><td><span class="qty">5</span></td><td><span class="val">R$ 12,00</span></td></tr>
+        <tr><td>Pregos 22×48</td><td>Fixação de tábuas e forros</td><td>KG</td><td><span class="qty">13</span></td><td><span class="val">R$ 12,00</span></td></tr>
+        <tr><td>Pregos 17×21</td><td>Uso fino em acabamentos</td><td>KG</td><td><span class="qty">20</span></td><td><span class="val">R$ 12,00</span></td></tr>
+        <tr><td>Pregos 12×12 (c/ cabeça)</td><td>Acabamento em forro e revestimento</td><td>KG</td><td><span class="qty">3</span></td><td><span class="val">R$ 19,00</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TINTA -->
+  <div class="material-group reveal">
+    <div class="group-header">
+      <span><span class="icon">🎨</span> Tinta</span>
+      <span class="tag">Acabamento</span>
+    </div>
+    <table>
+      <thead><tr><th>Item</th><th>Descrição</th><th>Un.</th><th>Qtd.</th><th>Valor Unit. (R$)</th></tr></thead>
+      <tbody>
+        <tr><td>Tinta de Piso Marrom</td><td>Lata 18 L – pintura do piso interno</td><td>UN</td><td><span class="qty">4</span></td><td><span class="val">R$ 217,55</span></td></tr>
+        <tr><td>Tinta de Piso Branca</td><td>Lata 18 L – pintura de detalhes e demarcações</td><td>UN</td><td><span class="qty">2</span></td><td><span class="val">R$ 76,76</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EPIs -->
+  <div class="material-group reveal">
+    <div class="group-header">
+      <span><span class="icon">🦺</span> Equipamentos de Proteção (EPIs)</span>
+      <span class="tag">Segurança</span>
+    </div>
+    <table>
+      <thead><tr><th>Item</th><th>Descrição</th><th>Un.</th><th>Qtd.</th><th>Valor Unit. (R$)</th></tr></thead>
+      <tbody>
+        <tr><td>Óculos de Proteção</td><td>Segurança dos voluntários na obra</td><td>UN</td><td><span class="qty">100</span></td><td><span class="val">R$ 3,97</span></td></tr>
+        <tr><td>Luva de Raspa</td><td>Proteção das mãos em trabalho pesado</td><td>UN</td><td><span class="qty">100</span></td><td><span class="val">R$ 9,00</span></td></tr>
+        <tr><td>Luva para Pintura</td><td>Proteção durante pintura e acabamento</td><td>UN</td><td><span class="qty">100</span></td><td><span class="val">R$ 3,99</span></td></tr>
+        <tr><td>Capacete</td><td>Proteção contra impactos durante a obra</td><td>UN</td><td><span class="qty">100</span></td><td><span class="val">R$ 26,40</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-box reveal">
+    <h2>Cada doação constrói muito mais do que uma parede.</h2>
+    <div class="quote-divider"></div>
+    <p>Uma tábua, um rolo de tinta, um capacete. Cada item entregue é um gesto concreto de amor ao próximo. Ao apoiar o Projeto Superação, você oferece a essa comunidade um lugar para rezar, se encontrar e crescer na fé.</p>
+  </div>
+
+  <!-- HOW TO HELP -->
+  <div class="reveal">
+    <h2 class="help-title"><span>🤝</span> Como Você Pode Ajudar</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">📦</span>
+        <h3>Doação de Material</h3>
+        <p>Doe qualquer item da lista acima, integralmente ou em parte. Toda contribuição é bem-vinda e faz a diferença. Converse com algum dos responsáveis para mais informações.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💰</span>
+        <h3>Doação Financeira</h3>
+        <p>Prefere contribuir em dinheiro? Podemos adquirir os materiais em seu nome. Entre em contato para saber como.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📢</span>
+        <h3>Divulgue o Projeto</h3>
+        <p>Compartilhe este material com amigos, familiares e conhecidos. Uma corrente de bondade começa com um gesto simples.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box reveal">
+    <span class="cta-cross">✝</span>
+    <h2>Faça parte desta história</h2>
+    <p>A comunidade aguarda com esperança e gratidão. Com a generosidade de cada benfeitor, esta capela se tornará um lar para a fé de muitas famílias. <strong>Que Deus abençoe cada gesto de doação.</strong></p>
+    <a class="btn" href="mailto:superacao@regnumchristi.org">Entre em Contato</a>
+    <div class="contacts">
+      Para mais informações, entre em contato com o responsável pelo projeto:<br>
+      <strong>Helena</strong> – 41 99826-1597 &nbsp;|&nbsp; <strong>Arthur</strong> – 41 99641-1287<br>
+      <strong>Superação – Movimento Regnum Christi</strong>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>✝</span> &nbsp; Superação – Movimento Regnum Christi &nbsp; <span>✝</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
